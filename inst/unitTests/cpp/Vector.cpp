@@ -850,55 +850,55 @@ IntegerVector vec_subset(IntegerVector x, IntegerVector y) {
 }
 
 // [[Rcpp::export]]
-NumericVector vec_set_raw()
+NumericVector vec_inject()
 {
     int64_t i = 12345;
     int64_t ii = 9876543210;
     
     NumericVector v(2);
     
-    v.setRaw(0, i);
-    v.setRaw(1, ii);
+    v.inject(0, i);
+    v.inject(1, ii);
     
     return v;
 }
 
 // [[Rcpp::export]]
-NumericVector vec_set_raw_array()
+NumericVector vec_inject_array()
 {
     const int64_t arr[] = { 12345, 9876543210 };
     
     NumericVector v(2);
-    v.setRaw(0, arr, 2);
+    v.inject(0, arr, 2);
     
     return v;
 }
 
 // [[Rcpp::export]]
-NumericVector vec_get_raw(NumericVector v)
+NumericVector vec_extract(NumericVector v)
 {
     int64_t i;
     int64_t ii;
     
-    v.getRaw(0, i);
-    v.getRaw(1, ii);
+    v.extract(0, i);
+    v.extract(1, ii);
     
     NumericVector v2(2);
-    v2.setRaw(0, i);
-    v2.setRaw(1, ii);
+    v2.inject(0, i);
+    v2.inject(1, ii);
     
     return v2;
 }
 
 // [[Rcpp::export]]
-NumericVector vec_get_raw_array(NumericVector v)
+NumericVector vec_extract_array(NumericVector v)
 {
     int64_t i[2];
     
-    v.getRaw(0, i, 2);
+    v.extract(0, i, 2);
     
     NumericVector v2(2);
-    v2.setRaw(0, i, 2);
+    v2.inject(0, i, 2);
     
     return v2;
 }

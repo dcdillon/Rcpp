@@ -378,7 +378,7 @@ public:
     inline typename traits::enable_if<
         traits::is_arithmetic< stored_type >::value
         && sizeof(T) <= sizeof(stored_type), void >::type
-    setRaw(R_xlen_t i, const T &val)
+    inject(R_xlen_t i, const T &val)
     {
         memcpy(&cache.ref(offset(i)), &val, sizeof(T));
     }
@@ -387,7 +387,7 @@ public:
     inline typename traits::enable_if<
         traits::is_arithmetic< stored_type >::value
         && sizeof(T) == sizeof(stored_type), void >::type
-    setRaw(R_xlen_t start, const T *val, std::size_t len)
+    inject(R_xlen_t start, const T *val, std::size_t len)
     {
         memcpy(&cache.ref(offset(start)), val, sizeof(T) * len);
     }
@@ -396,7 +396,7 @@ public:
     inline typename traits::enable_if<
         traits::is_arithmetic< stored_type >::value
         && sizeof(stored_type) >= sizeof(T), void >::type
-    getRaw(R_xlen_t i, T &val)
+    extract(R_xlen_t i, T &val)
     {
         memcpy(&val, &cache.ref(offset(i)), sizeof(T));
     }
@@ -405,7 +405,7 @@ public:
     inline typename traits::enable_if<
         traits::is_arithmetic< stored_type >::value
         && sizeof(stored_type) == sizeof(T), void >::type
-    getRaw(R_xlen_t start, T *val, std::size_t len)
+    extract(R_xlen_t start, T *val, std::size_t len)
     {
         memcpy(val, &cache.ref(offset(start)),
             sizeof(stored_type) * len);
